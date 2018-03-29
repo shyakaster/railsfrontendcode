@@ -26,6 +26,8 @@ function removePlaceholder () {
 }
 
 
+
+
 // Theme-banner slider 
 function BannerSlider () {
   var banner = $("#theme-main-banner");

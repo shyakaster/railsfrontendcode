@@ -75,7 +75,9 @@
  body .main-page-wrapper {
    overflow-x:hidden;
  }
-
+.long-text {
+  display: none
+}
 
  h1,h2,h3,h4,h5,h6,p,ul { margin:0;padding: 0;}
  h1,h2,h3,h4,h6 {color: #2d2d43;}
