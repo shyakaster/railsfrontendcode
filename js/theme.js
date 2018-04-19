@@ -1,4 +1,3 @@
-
 //  Theme Custom jquery file, 
 
   
@@ -48,6 +47,7 @@ function BannerSlider () {
     });
   };
 }
+
 
 
 

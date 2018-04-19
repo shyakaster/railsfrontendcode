@@ -74,14 +74,14 @@
 									<li class="dropdown-holder menu-list" ><a href="OurCurriculum.html" class="tran3s">Our Curriculum</a>
 										
 									</li>
-									<li class="dropdown-holder menu-list" ><a href="Events.html" class="tran3s">Events</a>
+									<li class="dropdown-holder menu-list" ><a href="Events.php" class="tran3s">Events</a>
 										
 									</li>
 									<li class="dropdown-holder menu-list" ><a href="service-v1.html" class="tran3s">Resources</a>
 										
 									</li>
 									<li class="menu-list"><a href="contact.html" class="tran3s" >Contact Us</a></li>
-									<li class="login-button"><a href="blog.html" >Blog</a></li>
+									<li class="login-button"><a href="blog.php" >Blog</a></li>
 								</ul>
 						   </div><!-- /.navbar-collapse -->
 						</nav> <!-- /.theme-main-menu -->
@@ -108,66 +108,107 @@
 			<!-- 
 			=============================================
 				Our Blog / Blog V3
-			============================================== 
-			-->
+			============================================== -->
+			
 			<div class="our-blog blog-v3">
 				<div class="container">
 					<div class="row">
-					<div class="wrapper col-md-10">
-						<div class="single-blog">
-							<div class="image"><img src="images/blog/21.jpg" alt=""></div>
-							<div class="text">
-								<h6>Alex Shyaka</h6>
-								<h5><a class="tran3s">OVERCOMING THE IMPOSTOR SYNDROME</a></h5>
-								
-								<span class="more">
-									<p>Per Wikipedia Impostor syndrome (also known as impostor phenomenon or fraud syndrome) is a concept describing high-achieving individuals who are marked by an inability to internalise their accomplishments and a persistent fear of being exposed as a “fraud”.
+						<div class="wrapper col-md-10">
+						<!--PHP -->
+			<?php 
+			$con = mysqli_connect('localhost','vetco_railsshop','therails256') ;
 
-Even when you feel like you have prepared enough, it keeps creeping in and eventually fades away as you take on more projects and deliver better experiences for your clients.
+				$db = mysqli_select_db($con,'vetco_railsshop');
 
-Apprehension is not a weakness, it is an indication that you are willing to get out of your comfort zone. Appreciate it and keep moving forward.
 
-Like any other bad feeling, it all starts with being aware of what is happening and then appreciating that it a normal feeling that will eventually go away. For a lot of people, it can be a show stopper because it makes you feel inadequate and not good enough for the job. A lot of people have failed to pursue their dreams fully because of this phenomenon.
+				if (!$con) {
+					echo "Not connected to the database";
+				}
+				if (!$db) {
+					echo "No database selected";
+				}
 
-Overcoming the syndrome is for sure a challenge but not one which is insurmountable. I have felt it and pretty much everyone who is invested in not just producing work but producing good work feels it at some point in their career.
+				else{
 
-One way of overcoming my blogger impostor syndrome is to write at least one short article a week and this is one of those. So, I implore you to not stop pursuing your dreams and aspirations. Appreciate the fear and the apprehension and just get on with it.</p>
-								</span>
-								<!--<a href="javascript:showMore()" class="tran3s" id="link">read more</a>-->
+					$sql = "SELECT * FROM blog";
+
+					$sql_query = mysqli_query($con,$sql);
+
+					if (mysqli_num_rows($sql_query)>0) {
+
+				    while ($row = mysqli_fetch_assoc($sql_query)) {
+						
+						echo "			
+						
+						<div class='single-blog' id='",$row[blog_title],"'>
+							<div class='image'><img style='max-height: 480px; width: auto;' src='images/blog/",$row[blog_image],"' alt=''> </div>
+							<div class='text'>
+								<h6>the rails blog</h6>
+								<h5><a class='tran3s'>",$row[blog_title],"</a></h5>
+								<p>",$row[blog_description],"</p>
+								<!--<a class='tran3s'>read more</a>-->
 							</div>
-						</div> <!-- /.single-blog -->
-						<div class="single-blog">
-							<div class="image"><img src="images/blog/19.jpg" alt=""></div>
-							<div class="text">
-								<h6>Alex Shyaka</h6>
-								<h5><a class="tran3s">HOW TO TELL A NOT SO WORTH IT CLIENT</a></h5>
-								<p>As a professional and a business man or woman you come across all manner of clients and you are constantly reminded that customer is king so you tread carefully. I’m a strong believer in offering more than you are expected to offer because I believe business thrives on good referrals.</p>
-								<!--<a class="tran3s">read more</a>-->
-							</div>
-						</div> <!-- /.single-blog -->
-						<div class="single-blog">
-							<div class="image"><img src="images/blog/20.jpg" alt=""></div>
-							<div class="text">
-								<h6>Alex Shyaka</h6>
-								<h5><a class="tran3s">DON’T GET STUCK IN “THE ADVANCED BEGINNER STAGE”.</a></h5>
-								<p>I love to learn new things especially when they are technology related, I always like to be informed and keep on top of the game. This could be for a couple of reasons, sometimes it could be the desire to want to sound intelligent when with peers or even to professionally keep abreast of things. </p>
-								<!--<a class="tran3s">read more</a>-->
-							</div>
-						</div> <!-- /.single-blog -->
+						</div> <!-- /.single-blog -->";
+						
+						 ?>
 
+				        <?php  
+				    }
+
+				    }
+				    else{?>
+				    	<tr><td colspan="5"><h4>There aren't any blog posts yet! Please check back later</h4></td>
+				    		<?php   
+
+
+				    }
+
+				}?>
 						
 
 					</div> <!-- /.wrapper -->
 					<!-- Recent Posts -->
 						<div class="col-md-2">
-							<div class="blog-recent-posts">
+							<div class="hidden-xs blog-recent-posts">
 								
 								<h5>Recent Posts</h5>
 								<hr>
 
-								<p>Overcoming the imposter syndrome</p><br>
-								<p>How to tell a not so worth it client</p><br>
-								<p>DON’T GET STUCK IN “THE ADVANCED BEGINNER STAGE”.</p>
+								<p><?php 
+								
+				if (!$con) {
+					echo "Not connected to the database";
+				}
+				if (!$db) {
+					echo "No database selected";
+				}
+
+				else{
+
+					$sql1 = "SELECT * FROM blog";
+
+					$sql_query5 = mysqli_query($con,$sql1);
+
+					if (mysqli_num_rows($sql_query5)>0) {
+
+				    while ($row4 = mysqli_fetch_assoc($sql_query5)) {
+						
+						echo 		
+						
+						"<a href='#",$row4[blog_title],"'>",$row4[blog_title],"<br>";
+						
+						  
+				    }
+
+				    }
+				    else{
+				    	
+				    	echo "There is no data in the database!";
+
+				    }
+
+				}?>
+								</p>
 
 
 
@@ -201,28 +242,24 @@ One way of overcoming my blogger impostor syndrome is to write at least one shor
 						<div class="col-md-3 col-sm-6 col-xs-12">
 							<div class="footer-logo">
 								<a href="index.html"><img src="images/logo/logo.png" alt="Logo"></a>
-								<h5><a href="#" class="tran3s">info@therailsshop.club</a></h5>
+								<h5><a href="#" class="tran3s">alexshyaka@therailsshop.club</a></h5>
 								<h6 class="p-color">+256752969844</h6>
 							</div>
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12 footer-list">
 							<h4>Quick Links</h4>
 							<ul>
-								<li><a href="#" class="tran3s">How it Works</a></li>
-								<li><a href="#" class="tran3s">Guarantee</a></li>
-								<li><a href="#" class="tran3s">Security</a></li>
-								<li><a href="#" class="tran3s">Report Bug</a></li>
-								<li><a href="#" class="tran3s">Pricing</a></li>
+								<li><a href="about-us.html" class="tran3s">Who We Are</a></li>
+								<li><a href="OurCurriculum" class="tran3s">Our Curriculum</a></li>
+								
 							</ul>
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12 footer-list">
 							<h4>About Us</h4>
 							<ul>
-								<li><a href="#" class="tran3s">About Singleton</a></li>
-								<li><a href="#" class="tran3s">Jobs</a></li>
-								<li><a href="#" class="tran3s">Team</a></li>
-								<li><a href="#" class="tran3s">Testimonials</a></li>
-								<li><a href="#" class="tran3s">Blog</a></li>
+								<li><a href="about-us.html" class="tran3s">About The Rails Shop</a></li>
+								<li><a href="http://railsgirls.com/uganda.html" class="tran3s">Rails Girls</a></li>
+								
 							</ul>
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12 footer-subscribe">
@@ -231,20 +268,16 @@ One way of overcoming my blogger impostor syndrome is to write at least one shor
 								<input type="text" placeholder="Enter your mail">
 							</form>
 							<ul>
-								<li><a href="#" class="tran3s"><i class="fa fa-facebook" aria-hidden="true"></i>facebook</a></li>
-								<li><a href="#" class="tran3s"><i class="fa fa-twitter" aria-hidden="true"></i>Twitter</a></li>
-								<li><a href="#" class="tran3s"><i class="fa fa-instagram" aria-hidden="true"></i>Instagram</a></li>
+								<li><a href="https://www.facebook.com/TheRailsShop/" class="tran3s"><i class="fa fa-facebook" aria-hidden="true"></i>facebook</a></li>
+								<li><a href="https://twitter.com/therailsshop" class="tran3s"><i class="fa fa-twitter" aria-hidden="true"></i>Twitter</a></li>
+								<li><a href="https://www.instagram.com/therailsshop/" class="tran3s"><i class="fa fa-instagram" aria-hidden="true"></i>Instagram</a></li>
 								
 							</ul>
 						</div>
 					</div> <!-- /.row -->
 
 					<div class="bottom-footer clearfix">
-						<ul class="float-right">
-							<li><h3><span class="timer p-color" data-from="0" data-to="213" data-speed="5000" data-refresh-interval="50">0</span> Students</h3></li>
-							<li><h3><span class="timer p-color" data-from="0" data-to="20" data-speed="5000" data-refresh-interval="50">0</span> Tutors</h3></li>
-							<li><h3><span class="timer p-color" data-from="0" data-to="1110" data-speed="5000" data-refresh-interval="50">0</span> Shops</h3></li>
-						</ul>
+						
 						<p class="float-left">&copy; 2018 <a href="#" class="tran3s p-color">The Rails Shop</a>. Created with <i class="fa fa-heart"></i> by <a href="http://www.samhez.com"  target="_blank">Samuel Epodoi</a></p>
 					</div>
 				</div> <!-- /.container -->
@@ -252,39 +285,8 @@ One way of overcoming my blogger impostor syndrome is to write at least one shor
 
 
 
-			<!-- Sign-Up Modal -->
-			<div class="modal fade signUpModal theme-modal-box" role="dialog">
-				<div class="modal-dialog">
-				    <!-- Modal content-->
-				    <div class="modal-content">
-					    <div class="modal-body">
-					        <h3>Login with Social Networks</h3>
-					        <ul class="clearfix">
-					        	<li class="float-left"><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i> facebook</a></li>
-					        	<li class="float-left"><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i> Google</a></li>
-					        	<li class="float-left"><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i> Twitter</a></li>
-					        	<li class="float-left"><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i> Linkedin</a></li>
-					        </ul>
-					        <form action="#">
-					        	<h6><span>or</span></h6>
-					        	<div class="wrapper">
-					        		<input type="text" placeholder="Username or Email">
-					        		<input type="password" placeholder="Password">
-					        		<ul class="clearfix">
-										<li class="float-left">
-											<input type="checkbox" id="remember">
-											<label for="remember">Remember Me</label>
-										</li>
-										<li class="float-right"><a href="#" class="p-color">Lost Your Password?</a></li>
-									</ul>
-									<button class="p-bg-color hvr-trim-two">Login</button>
-					        	</div>
-					        </form>
-					    </div> <!-- /.modal-body -->
-				    </div> <!-- /.modal-content -->
-				</div> <!-- /.modal-dialog -->
-			</div> <!-- /.signUpModal -->
 
+	
 	        
 
 	        <!-- Scroll Top Button -->
