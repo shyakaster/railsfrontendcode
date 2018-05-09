@@ -204,6 +204,7 @@ header.theme-menu-wrapper #mega-menu-wrapper .nav>li>a {
   position: relative;
   z-index: 9;
 }
+
 header.theme-menu-wrapper #mega-menu-wrapper .nav>li>a:before,
 #mega-menu-wrapper .nav>li.dropdown-holder .sub-menu li a:before {
   content: '';
